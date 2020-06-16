@@ -60,7 +60,7 @@ Route::get('tes', function(){
 ini adalah halaman {{ $parsingDataNama  }}
 ```
 double data: 
-```
+```php
 <!-- location file : namaAppKalian/routes/web.php --> 
 Route::get('tes', function(){
     $dataBiasa = "Hello Selamat Datang";
