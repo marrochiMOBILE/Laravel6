@@ -37,7 +37,7 @@ Route::get('about', function(){
 + `return` disini mengembalikan tampilan dengan teks string `ini halaman about us`
 
 
-### 1.4x
+### 1.4ex
 ```php
  Route::get("olahraga","OlahragaController@halo");
 ```
@@ -63,6 +63,7 @@ double data:
 ```php
 <!-- location file : namaAppKalian/routes/web.php --> 
 Route::get('tes', function(){
+    $data['olahraga'] = "bulu tangkis";
     $dataBiasa = "Hello Selamat Datang";
     $dataArraySingle[] = 'kimi'; 
     $dataArraySingle[] = 'hime'; 
@@ -77,12 +78,14 @@ Route::get('tes', function(){
                         'umur' => '20'
                         ]
                     ];
-    return view('tes',compact('dataBiasa','dataArraySingle','dataArrayDouble'));
+    return view('tes',compact('dataBiasa','dataArraySingle','dataArrayDouble','data'));
 });
 ```
 ```php
 <!-- location file : namaAppKalian/resources/views/tes.blade.php --> 
 ini adalah halaman tes
+<hr>
+ini adalah data => {{ $data['olahraga'] }}
 <hr>
 data biasa => {{ $dataBiasa }}
 <hr>
@@ -109,5 +112,85 @@ data array double
 </tr>
 @endforeach
 </table>
+```
 
+### array
+```php
+<!-- location file : namaAppKalian/routes/web.php --> 
+Route::get('tes', function(){
+    $data['olahraga'] = "bulu tangkis";
+    $data['hello'] = "Hello Selamat Datang";
+    $data['array'] = [[
+                        'nama' => 'marrochi',
+                        'umur' => '23'
+                        ],[
+                        'nama' => 'kamila',
+                        'umur' => '20'
+                        ]
+                    ];
+    return view('tes',$data);
+});
+```
+
+```php
+<!-- location file : namaAppKalian/resources/views/tes.blade.php --> 
+ini adalah halaman tes
+<hr>
+data olahraga => {{ $olahraga }}
+<hr>
+data hello => {{ $hello }}
+<hr>
+
+<hr>
+data array dibawah ini
+<hr>
+<table>
+@foreach($array as $double)
+<tr>
+    <td>{{ $loop->iteration }}</td>
+    <td>{{ $double['nama'] }}</td>
+    <td>{{ $double['umur'] }}</td>
+</tr>
+@endforeach
+</table>
+```
+### with
+```php
+<!-- location file : namaAppKalian/routes/web.php --> 
+Route::get('tes', function(){
+    $data['olahraga'] = "bulu tangkis";
+    $data['hello'] = "Hello Selamat Datang";
+    $data['array'] = [[
+                        'nama' => 'marrochi',
+                        'umur' => '23'
+                        ],[
+                        'nama' => 'kamila',
+                        'umur' => '20'
+                        ]
+                    ];
+    return view('tes')->with($data);
+});
+```
+
+```php
+<!-- location file : namaAppKalian/resources/views/tes.blade.php --> 
+ini adalah halaman tes
+<hr>
+data olahraga => {{ $olahraga }}
+<hr>
+data hello => {{ $hello }}
+<hr>
+
+<hr>
+data array dibawah ini
+<hr>
+<table>
+@foreach($array as $double)
+<tr>
+    <td>{{ $loop->iteration }}</td>
+    <td>{{ $double['nama'] }}</td>
+    <td>{{ $double['umur'] }}</td>
+</tr>
+@endforeach
+</table>
 ```
