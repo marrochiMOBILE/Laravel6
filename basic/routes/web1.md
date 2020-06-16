@@ -44,3 +44,70 @@ Route::get('about', function(){
 + `olahraga` path ini adalah ketika browser membaca domain kalian seprti => appDomainKalian.com/olahraga
 +  `OlahragaController` adalah controller
 +  `@halo` adalah method yg diminta
+
+## memparsing data di routing
+### compact 
+single data :
+```php
+<!-- location file : namaAppKalian/routes/web.php --> 
+Route::get('tes', function(){
+    $parsingDataNama = 'ochi';
+    return view('tes',compact('parsingDataNama'));
+});
+```
+```php
+<!-- location file : namaAppKalian/resources/views/tes.blade.php --> 
+ini adalah halaman {{ $parsingDataNama  }}
+```
+double data: 
+```
+<!-- location file : namaAppKalian/routes/web.php --> 
+Route::get('tes', function(){
+    $dataBiasa = "Hello Selamat Datang";
+    $dataArraySingle[] = 'kimi'; 
+    $dataArraySingle[] = 'hime'; 
+    $dataArraySingle[] = 'aori'; 
+    $dataArraySingle[] = 'osaka'; 
+    $dataArraySingle[] = 'miyabi'; 
+    $dataArrayDouble = [[
+                        'nama' => 'marrochi',
+                        'umur' => '23'
+                        ],[
+                        'nama' => 'kamila',
+                        'umur' => '20'
+                        ]
+                    ];
+    return view('tes',compact('dataBiasa','dataArraySingle','dataArrayDouble'));
+});
+```
+```php
+<!-- location file : namaAppKalian/resources/views/tes.blade.php --> 
+ini adalah halaman tes
+<hr>
+data biasa => {{ $dataBiasa }}
+<hr>
+@php
+     $dataArraySingle_length = count($dataArraySingle);
+@endphp
+
+<hr>
+dataArraySingle :  <br>
+<hr>
+@for ($i = 0; $i < $dataArraySingle_length ; $i++)
+    ini nilainya {{ $o = (0+$i) }} :    {{ $dataArraySingle[$i] }} <br> 
+@endfor
+
+<hr>
+data array double
+<hr>
+<table>
+@foreach($dataArrayDouble as $double)
+<tr>
+    <td>{{ $loop->iteration }}</td>
+    <td>{{ $double['nama'] }}</td>
+    <td>{{ $double['umur'] }}</td>
+</tr>
+@endforeach
+</table>
+
+```
