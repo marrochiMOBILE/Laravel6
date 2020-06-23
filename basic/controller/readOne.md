@@ -10,5 +10,25 @@ php artisan make:controller NamaControllernya
 
 cara mengaksesnya diatas seperti ini :
 ```php
-Route::get('/','NamaControllernya@kemudianMethodnya')
+Route::get('produk','NamaControllernya@kemudianMethodnya')
+```
+
+contoh dibawah 1.1ex:
+##### routenya
+```php
+Route::get('produk','NamaControllernya@index');
+```
+
+##### controlernya :
+```php
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+
+class NamaControllernya extends Controller
+{
+    public function index(){
+        return 'mister deni ok mantap';
+    }
+}
 ```
