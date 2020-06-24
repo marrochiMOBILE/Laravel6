@@ -89,3 +89,63 @@ dan gunakan template lain untuk menghubungkan templatenya :
 
 
 ```
+
+
+## kalian jugha bisa menggunakan include
+#### file yg di costum
+```php
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@yield('title')</title>
+
+    @yield('cssjs')
+</head>
+<body>
+    @yield('header')
+
+    @yield('content')
+
+    @yield('footer')
+</body>
+</html>
+```
+
+#### file yg di include
+```php
+<link rel="stylesheet" href="{{ asset('assets/css/bootstrap.css') }}">
+
+<script src="{{ asset('assets/js/jquery.js') }}"></script>
+<script src="{{ asset('assets/js/popper.js') }}"></script>
+<script src="{{ asset('assets/js/bootstrap.js') }}"></script>
+```
+#### file yg dipake
+```php
+@extends('tesBase')
+
+@section('title')
+    Tentang Blade
+@endsection
+
+@section('cssjs')
+   @include('includd')
+@endsection
+
+@section('header')
+    <hr>
+    <h1>bagian Header Bos</h1>
+    <hr>
+@endsection
+
+@section('content')
+    <h3>ini bagian content</h3>
+@endsection
+
+@section('footer')
+    <hr>
+    <h1>Bagian Footer bos</h1>
+    <hr>
+@endsection
+```
